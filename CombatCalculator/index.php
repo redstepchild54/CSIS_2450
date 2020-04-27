@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<?php
+session_start();
+require_once 'php/loginredirect.php';
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -11,7 +10,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        // put your code here
+        echo "<p>You have successfully logged in. Welcome " . $_SESSION['username'] . "!";
         ?>
     </body>
 </html>

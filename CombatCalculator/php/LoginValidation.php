@@ -64,35 +64,6 @@ if (!$sqlQueryReturn) {
         attemptLogin($myUsername, $myPassword, $myIpAddress, $failedLoginAttempts, $mySqlConnection);
     }
 }
-/*
-  $result = $mySqlConnection->query($sql);
-
-  if (!$result) {
-  //something went wrong, display the error
-  echo 'Something went wrong while signing in. Please try again later.';
-  //die($conn->error); //debugging purposes, uncomment when needed
-  } else {
-  //the query was successfully executed, there are 2 possibilities
-  //1. the query returned data, the user can be signed in
-  //2. the query returned an empty result set, the credentials were wrong
-  if (mysqli_num_rows($result) == 0) {
-  echo 'You have supplied a wrong user/password combination. Please try again.';
-  } else {
-  //set the $_SESSION['signed_in'] variable to TRUE
-  $_SESSION['signed_in'] = true;
-
-  //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
-  while ($row = $result->fetch_assoc()) {
-  $_SESSION['user_id'] = $row['id_users'];
-  $_SESSION['user_name'] = $row['username'];
-  $_SESSION['first_name'] = $row['first_name'];
-  $_SESSION['last_name'] = $row['last_name'];
-  $_SESSION['email'] = $row['email'];
-  }
-
-  echo 'Welcome, ' . $_SESSION['uname'] . '';
-  }
-  } */
 
 function attemptLogin($username, $password, $ipAddress, $failedLoginAttempts, $sqlConnection) {
     //See if there are any users in the database with the username.
@@ -119,7 +90,7 @@ function attemptLogin($username, $password, $ipAddress, $failedLoginAttempts, $s
         if (password_verify($password, $sqlPassword)) {
             // If the passwords match, log the user in.
             updateFailedLoginAttempts($ipAddress, 0, $sqlConnection);
-            $sqlStatement = "SELECT id_users, first_name, last_name, email, username"
+            $sqlStatement = "SELECT id_users, first_name, last_name, email, username "
                     . "FROM `combatcalculator`.`users` "
                     . "WHERE username = '$username'";
 
@@ -131,16 +102,18 @@ function attemptLogin($username, $password, $ipAddress, $failedLoginAttempts, $s
                 die('Invalid query: ' . mysqli_error($sqlConnection));
             } else {
                 //set the $_SESSION['signed_in'] variable to TRUE
-                $_SESSION['signed_in'] = true;
+                $_SESSION['logged_in'] = true;
 
                 //we also put the user_id and user_name values in the $_SESSION, so we can use it at various pages
                 while ($row = $sqlQueryReturn->fetch_assoc()) {
                     $_SESSION['user_id'] = $row['id_users'];
-                    $_SESSION['user_name'] = $row['username'];
+                    $_SESSION['username'] = $row['username'];
                     $_SESSION['first_name'] = $row['first_name'];
                     $_SESSION['last_name'] = $row['last_name'];
                     $_SESSION['email'] = $row['email'];
                 }
+                
+                 header("Location:../index.php");
             }
         } else {
             // If the passwords do not match, update the failed login attempts.
