@@ -36,6 +36,14 @@ CREATE TABLE `combatcalculator`.`loginattempts` (
   PRIMARY KEY (`id_login_attempts`),
   UNIQUE INDEX `_UNIQUE` (`id_login_attempts` ASC) VISIBLE);
 
+ -- ---------------------------------------------------------------
+-- Populate Table `combatcalculator`.`users`
+-- ---------------------------------------------------------------
+INSERT INTO `combatcalculator`.`users` (first_name, last_name, email, username, password, active)
+VALUES 
+	("William", "McConnell", "wmcconnell@test.com", "wmcconnell", "$10$9pLANFqNyl.3ic9MW712jetWPkCi/LkXkbERQ9UqA1Fc4dV7jNAZK", 1),
+	("Whitney", "Cahoon", "wcahoon@test.com", "wcahoon", "$2y$10$qbnl7mk7M9bNjQdtDEo76OfJuICYSVkNJF4r0FZkv3H.iCd.c8Kve", 1);
+
 -- ---------------------------------------------------------------
 -- Done
 -- ---------------------------------------------------------------
