@@ -2,7 +2,7 @@
 
 $host = "localhost"; //host location
 $user = "root";
-$password = "Redstepchild54)"; //This will need to be updated and changed based on your instance of MySQL
+$password = ""; //This will need to be updated and changed based on your instance of MySQL
 $dbname = "combatcalculator";
 $mySqlConnection = new mysqli($host, $user, $password, $dbname)
         or die('Could not connect to the database server.  ' . mysqli_connect_error($mySqlConnection));
